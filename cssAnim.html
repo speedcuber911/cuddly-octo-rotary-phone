@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style media="screen">
+      html {
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      .paren {
+        display: flex;
+        width: 400px;
+        height: 400px;
+        background: "#afd275";
+      }
+      .kid {
+        display: flex;
+        background: "#c2cad0";
+        width: 200px;
+        height: 200px;
+        animation: left-to-right 1s ease-in forwards infinite alternate;
+        animation-play-state: paused;
+      }
+
+      .paren:hover .kid {
+        /* transform: translateX(100%) translateY(100%); */
+      }
+
+      @keyframes left-to-right {
+        100% {
+          transform: translateX(100%);
+        }
+
+        50% {
+          transform: translateY(100%);
+        }
+
+        75% {
+          transform: translateX(100%) translateY(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paren">
+      <div class="kid"></div>
+    </div>
+
+    <button id="doer">Start</button>
+  </body>
+  <script>
+    doer.addEventListener("click", () => {
+      console.log(
+        "here",
+        document.querySelector(".kid").style.animationPlayState
+      );
+      if (
+        document.querySelector(".kid").style.animationPlayState === "running"
+      ) {
+        document.querySelector(".kid").style.animationPlayState = "paused";
+        doer.innerText = "Play";
+      } else {
+        document.querySelector(".kid").style.animationPlayState = "running ";
+        doer.innerText = "Stop";
+      }
+    });
+  </script>
+</html>
