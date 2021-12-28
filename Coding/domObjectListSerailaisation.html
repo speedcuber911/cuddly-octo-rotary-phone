@@ -1,0 +1,94 @@
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style media="screen">
+      .parent {
+        display: flex;
+      }
+
+      .p1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border: red thin dashed;
+        margin-right: 10px;
+      }
+
+      .p2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border: blue thin dashed;
+      }
+
+      .c1 {
+        width: 10px;
+        height: 10px;
+        background: green;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="p1">
+        <div class="c1"></div>
+      </div>
+
+      <div class="p2">
+        <div class="c1"></div>
+      </div>
+    </div>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <a name="list">The list:</a>
+    <ul id="lis"></ul>
+    <div id="container"></div>
+    <script>
+      let data = {
+        Fish: {
+          trout: {},
+          salmon: {},
+        },
+        Tree: {
+          Huge: {
+            sequoia: {},
+            oak: {},
+          },
+          Flowering: { "apple tree": {}, magnolia: {} },
+        },
+      };
+      let container = document.getElementById("container");
+
+      function createDom(parent, currentSerial, depth) {
+        console.log(currentSerial);
+        const unList = document.createElement("ul");
+        if (depth == 5) return;
+        Object.keys(currentSerial).forEach((currObj, i) => {
+          if (Object.keys(currObj).length) {
+            const liItem = document.createElement("li");
+            liItem.append(document.createTextNode(currObj));
+            liItem.append(createDom(liItem, currentSerial[currObj], depth + 1));
+            unList.append(liItem);
+          } else {
+            const liItem = document.createElement("li");
+            liItem.append(document.createTextNode(currObj));
+            unList.append(liItem);
+          }
+        });
+        return unList;
+      }
+      container.append(createDom(container, data, 0));
+    </script>
+  </body>
+</html>
